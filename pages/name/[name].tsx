@@ -3,13 +3,13 @@ import { pokeApi } from '../../api';
 import { POKEMONS_AMOUNT } from '../../api/pokeApi';
 import { Layout } from '../../components/layouts';
 import PokemonFullCard from '../../components/pokemon/PokemonFullCard';
-import { FullPokemon, Pokemon } from '../../interfaces';
+import { FullPokemon, Pokemon, PokemonListResponse } from '../../interfaces';
 
 interface Props {
   pokemon: Pokemon;
 }
 
-const PokemonPage: NextPage<Props> = ({ pokemon }) => {
+const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
   return (
     <Layout
       title={
@@ -22,9 +22,12 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
-  const paths = [...Array(POKEMONS_AMOUNT)].map((value, index) => ({
+  const { data } = await pokeApi.get<PokemonListResponse>(
+    `/pokemon?limit=${POKEMONS_AMOUNT}`
+  );
+  const paths = data.results.map((pokemon) => ({
     params: {
-      id: `${index + 1}`,
+      name: pokemon.name,
     },
   }));
 
@@ -34,9 +37,9 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
   };
 };
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { id } = params as { id: string };
+  const { name } = params as { name: string };
 
-  const { data } = await pokeApi.get<FullPokemon>(`pokemon/${id}`);
+  const { data } = await pokeApi.get<FullPokemon>(`pokemon/${name}`);
 
   const pokemon: Pokemon = {
     id: data.id,
@@ -51,4 +54,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-export default PokemonPage;
+export default PokemonByNamePage;

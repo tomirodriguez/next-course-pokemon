@@ -25,7 +25,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const pokemons: SmallPokemon[] = data.results.map((pkm, index) => ({
     id: index + 1,
     name: pkm.name,
-    url: pkm.url,
     image:
       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/' +
       (index + 1) +

@@ -7,9 +7,14 @@ export interface PokemonListResponse {
 
 export interface SmallPokemon {
   name: string;
-  url: string;
   id: number;
   image: string;
+}
+
+export interface Pokemon {
+  name: string;
+  id: number;
+  sprites: Sprites;
 }
 
 export interface FullPokemon {

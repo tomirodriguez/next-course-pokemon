@@ -4,9 +4,14 @@ import { FC } from 'react';
 interface Props {
   sprite: string;
   name: string;
+  priority?: boolean;
 }
 
-export const PokemonSprite: FC<Props> = ({ sprite, name }) => {
+export const PokemonSprite: FC<Props> = ({
+  sprite,
+  name,
+  priority = false,
+}) => {
   return (
     <Image
       src={sprite}
@@ -14,6 +19,7 @@ export const PokemonSprite: FC<Props> = ({ sprite, name }) => {
       title={name}
       layout={'fill'}
       objectFit="contain"
+      priority={priority}
     />
   );
 };

@@ -1,10 +1,8 @@
-const favoritesFromLocalStorage = (): number[] =>
-  typeof window !== 'undefined'
-    ? JSON.parse(localStorage.getItem('favorites') || '[]')
-    : [];
+const getPokemons = (): number[] =>
+  JSON.parse(localStorage.getItem('favorites') || '[]');
 
 const toggleFavorite = (id: number) => {
-  let favorites: number[] = favoritesFromLocalStorage();
+  let favorites: number[] = getPokemons();
 
   if (favorites.includes(id)) favorites = favorites.filter((fav) => fav !== id);
   else favorites.push(id);
@@ -12,9 +10,8 @@ const toggleFavorite = (id: number) => {
   localStorage.setItem('favorites', JSON.stringify(favorites));
 };
 
-const isFavorite = (id: number): boolean =>
-  favoritesFromLocalStorage().includes(id);
+const isFavorite = (id: number): boolean => getPokemons().includes(id);
 
-const functions = { toggleFavorite, isFavorite };
+const functions = { toggleFavorite, isFavorite, getPokemons };
 
 export default functions;

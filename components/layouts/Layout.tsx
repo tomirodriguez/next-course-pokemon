@@ -15,8 +15,12 @@ export const Layout: FC<Props> = ({ children, title }) => {
         <meta name="keywords" content="XXXX, pokemon, pokedex" />
       </Head>
 
-      <Navbar />
-      <main className="container mx-auto my-6 px-4 sm:px-8">{children}</main>
+      <div className="h-screen flex flex-col">
+        <Navbar />
+        <main className="container mx-auto my-6 px-4 sm:px-8 grow">
+          {children}
+        </main>
+      </div>
     </>
   );
 };

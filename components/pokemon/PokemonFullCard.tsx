@@ -1,16 +1,18 @@
-import { FC, useState } from 'react';
-import { FullPokemon } from '../../interfaces';
+import { FC, useEffect, useState } from 'react';
+import { Pokemon } from '../../interfaces/pokeApi';
 import { localFavorites } from '../../utils';
 import { PokemonSprite } from './PokemonSprite';
 
 interface Props {
-  pokemon: FullPokemon;
+  pokemon: Pokemon;
 }
 
 const PokemonFullCard: FC<Props> = ({ pokemon }) => {
-  const [isInFavorites, setIsInFavorites] = useState(
-    localFavorites.isFavorite(pokemon.id)
-  );
+  const [isInFavorites, setIsInFavorites] = useState(false);
+
+  useEffect(() => {
+    setIsInFavorites(localFavorites.isFavorite(pokemon.id));
+  }, [pokemon.id]);
 
   const toggleFavorite = () => {
     localFavorites.toggleFavorite(pokemon.id);
@@ -40,6 +42,7 @@ const PokemonFullCard: FC<Props> = ({ pokemon }) => {
               pokemon.sprites.front_default
             }
             name={pokemon.name}
+            priority
           />
         </div>
         <div className="grid grid-cols-4 h-20 md:h-30 lg:h-40">

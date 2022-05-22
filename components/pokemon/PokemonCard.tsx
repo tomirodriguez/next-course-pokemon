@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 import { SmallPokemon } from '../../interfaces';
@@ -14,7 +13,10 @@ export const PokemonCard: FC<Props> = ({ pokemon }) => {
   return (
     <Link href={`/pokemon/${id}`}>
       <a className="h-full relative flex flex-col items-center p-2 rounded bg-slate-600 cursor-pointer hover:-translate-y-1 transition-transform">
-        <div className="absolute left-2 top-2 text-lg">
+        <div
+          className="absolute left-2 top-2 text-lg z-50"
+          style={{ textShadow: '2px 2px #00000079' }}
+        >
           <b>{`#${id}`}</b>
         </div>
         <div className="flex-grow w-full">

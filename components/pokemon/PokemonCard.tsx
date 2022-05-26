@@ -11,7 +11,7 @@ export const PokemonCard: FC<Props> = ({ pokemon }) => {
   const { id, name, image } = pokemon;
 
   return (
-    <Link href={`/pokemon/${id}`}>
+    <Link href={name ? `/name/${name}` : `/pokemon/${id}`}>
       <a className="h-full relative flex flex-col items-center p-2 rounded bg-slate-600 cursor-pointer hover:-translate-y-1 transition-transform">
         <div
           className="absolute left-2 top-2 text-lg z-50"
